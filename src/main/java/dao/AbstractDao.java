@@ -21,7 +21,7 @@ public abstract class AbstractDao<T> {
     @Inject
     Provider<EntityManager> entitiyManagerProvider;
     
-    protected EntityManager getEM(){
+    final protected EntityManager getEM(){
     	return entitiyManagerProvider.get();
     }
     
@@ -34,17 +34,9 @@ public abstract class AbstractDao<T> {
     	if(limit != null && limit > 0)
     		query.setMaxResults(limit);
 
-//    	System.out.println("Query: " + GET_LIST);
-    	
     	@SuppressWarnings("unchecked")
 		Collection<T> result =  query.getResultList();
     	
-//    	if(result != null){
-//    		System.out.println("List size: " + result.size());
-//    		for(T t: result){
-//    			System.out.println(t);
-//    		}
-//    	}
     	return result;
     }
 	
@@ -54,10 +46,11 @@ public abstract class AbstractDao<T> {
 	}
 
 	@Transactional
-	public void save(T entity) {
+	public T save(T entity) {
 		EntityManager em = getEM();
-		em.merge(entity);
+		entity = em.merge(entity);
 		em.flush();
+		return entity;
 		
 	}
 
