@@ -1,37 +1,24 @@
 package dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import models.uma.Email;
-import ninja.jpa.JpaModule;
-import ninja.utils.NinjaMode;
-import ninja.utils.NinjaPropertiesImpl;
+import ninja.NinjaDaoTestBase;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.persist.PersistService;
-
-public class AbstractDaoTest {
+public class AbstractDaoTest extends NinjaDaoTestBase {
 	
 	private TestDao testDao;
-	private PersistService service;
+	
 	
 	@Before
 	public void setup(){
-		NinjaPropertiesImpl ninjaProperties = new NinjaPropertiesImpl(NinjaMode.test);
-		Injector injector = Guice.createInjector(new JpaModule(ninjaProperties));
-		service = injector.getInstance(PersistService.class);
-		service.start();
 		
-		testDao = injector.getInstance(TestDao.class);
-	}
-	
-	@After
-	public void setDown(){
-		service.stop();
+		
+		testDao = getInstance(TestDao.class);
 	}
 
 	@Test
