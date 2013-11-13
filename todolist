@@ -1,0 +1,4 @@
+TODO dev list
+- verify oneToOne and ManyToOne in User and Email
+- migration sql with flyway
+- add restricted usernames list/logic (like admin, support, administrator, etc)

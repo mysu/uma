@@ -1,13 +1,12 @@
 package dao.uma.user;
 
+import java.util.Collection;
+
 import models.uma.User;
-import dao.AbstractDao;
 
-public class UserDao extends AbstractDao<User> {
-
-	@Override
-	protected Class<User> getEntityClass() {
-		return User.class;
-	}
-
+public interface UserDao {
+    Collection<User> getList(int offset, Integer limit);
+    User get(long id);
+    User save(User user);
+    User getByUsername(String username);
 }
