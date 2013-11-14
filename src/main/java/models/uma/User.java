@@ -8,9 +8,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import services.uma.Cacheable;
+
 @Entity(name="uma_user")
-public class User {
+public class User implements Cacheable<Long> {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 8536322154189025203L;
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
@@ -81,5 +88,13 @@ public class User {
 		this.defaultEmail = defaultEmail;
 		return this;
 	}
+    @Override
+    public Long getKey() {
+       return getId();
+    }
+    @Override
+    public String getClassName() {
+        return getClass().getSimpleName();
+    }
  
 }

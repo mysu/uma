@@ -18,6 +18,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 
     @Override
     @Transactional
+    //TODO test it
     public User getByUsername(String username) {
         Query query = getEM().createQuery(getByUsername);
         query.setParameter("userName", username);
