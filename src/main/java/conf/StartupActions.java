@@ -9,23 +9,23 @@ import com.google.inject.Inject;
 
 @Singleton
 public class StartupActions {
-    
+
     private NinjaProperties ninjaProperties;
 
     @Inject
     public StartupActions(NinjaProperties ninjaProperties) {
         this.ninjaProperties = ninjaProperties;
     }
-    
-    @Start(order=100)
+
+    @Start(order = 100)
     public void generateDummyDataWhenInTest() {
-        
+
         if (!ninjaProperties.isProd()) {
-            
-          //  setupDao.setup();
-            
+
+            // setupDao.setup();
+
         }
-        
+
     }
 
 }

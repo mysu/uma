@@ -7,16 +7,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import services.uma.Cacheable;
 
-@Entity(name = "uma_email")
-public class Email implements Cacheable<Long>{
+@Entity
+@Table(name="uma_email")
+public class Email implements Cacheable<Long> {
     /**
      * 
      */
     private static final long serialVersionUID = 1725587779039132112L;
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,11 +49,12 @@ public class Email implements Cacheable<Long>{
 
     @Override
     public Long getKey() {
-       return getId();
+        return getId();
     }
 
     @Override
-    public String getClassName() {
-       return Email.class.getSimpleName();
+    public Class<?> getType() {
+        return Email.class;
     }
+
 }

@@ -23,6 +23,8 @@ import ninja.utils.NinjaProperties;
 
 import com.google.inject.Inject;
 
+import controllers.uma.api.user.ApiUserController;
+
 public class Routes implements ApplicationRoutes {
     
     @Inject
@@ -50,6 +52,8 @@ public class Routes implements ApplicationRoutes {
         // Index / Catchall shows index page
         ///////////////////////////////////////////////////////////////////////
 //        router.GET().route("/.*").with(ApplicationController.class, "index");
+        
+        router.GET().route("/api/users").with(ApiUserController.class, "listUsers");
     }
 
 }

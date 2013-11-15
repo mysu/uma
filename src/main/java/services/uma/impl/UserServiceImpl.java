@@ -2,31 +2,31 @@ package services.uma.impl;
 
 import java.util.Collection;
 
-import com.google.inject.Inject;
-
-import dao.uma.user.UserDao;
 import models.uma.User;
+import repository.uma.UserRepository;
 import services.uma.UserService;
+
+import com.google.inject.Inject;
 
 public class UserServiceImpl implements UserService {
     private final static int LIMIT_DEFAULT = 10;
     @Inject
-    private UserDao userDao;
+    private UserRepository userRepository;
 
     @Override
     public User getUserById(long id) {
-        return userDao.get(id);
+        return userRepository.getById(id);
     }
 
     @Override
     public Collection<User> getUserList(int offset, Integer limit) {
-        return userDao.getList(offset, (limit != null && limit > 0) ? limit
+        return userRepository.getList(offset, (limit != null && limit > 0) ? limit
                 : LIMIT_DEFAULT);
     }
 
     @Override
     public User saveUser(User user) {
-        return userDao.save(user);
+        return userRepository.save(user);
     }
 
     @Override
@@ -40,8 +40,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    //TODO finish this feature, add email support
     public User getUserByUsernameOrEmail(String userName) {
-        return userDao.getByUsername(userName);
+        return userRepository.getByUsername(userName);
     }
 
 }
