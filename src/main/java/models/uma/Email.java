@@ -21,9 +21,10 @@ public class Email implements Cacheable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="eml_id")
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(name="eml_email", unique = true, nullable = false)
     private String email;
 
     @ManyToOne(fetch = FetchType.LAZY)

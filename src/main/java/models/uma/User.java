@@ -2,11 +2,9 @@ package models.uma;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import services.uma.Cacheable;
@@ -22,25 +20,25 @@ public class User implements Cacheable<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="usr_id")
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(name="usr_username", unique = true, nullable = false)
     private String username;
 
-    @Column(nullable = false)
+    @Column(name="usr_password", nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(name="usr_firstname")
     private String firstname;
 
-    @Column(nullable = false)
+    @Column(name="usr_lastname")
     private String lastname;
 
+    @Column(name="usr_gender" )
     private Gender gender;
-
-    //TODO test it
-    @OneToOne(fetch = FetchType.EAGER)
-    private Email defaultEmail;
+    
+    //TODO add default email
 
     public Long getId() {
         return id;
@@ -93,15 +91,6 @@ public class User implements Cacheable<Long> {
 
     public User setGender(Gender gender) {
         this.gender = gender;
-        return this;
-    }
-
-    public Email getDefaultEmail() {
-        return defaultEmail;
-    }
-
-    public User setDefaultEmail(Email defaultEmail) {
-        this.defaultEmail = defaultEmail;
         return this;
     }
 
