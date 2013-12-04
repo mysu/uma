@@ -1,3 +1,6 @@
+--
+--
+
 create table uma_user
 (
   usr_id serial not null primary key,

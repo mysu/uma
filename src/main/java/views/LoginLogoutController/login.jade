@@ -1,0 +1,23 @@
+extend ../layout/defaultLayout
+block params
+  - title="Login"
+
+block content
+  .container
+    .alert.alert-info
+      b Pssst.
+      | Default user is "bob@gmail.com" / password is "secret".
+    // Example row of columns
+    .row
+      .col-lg-8
+        form.form-horizontal(action='/login', method='post', role='form')
+          .form-group
+            label.col-lg-4.control-label(for='username') #{i18n.getValue("login.username")}
+            .col-lg-8
+              input#username.form-control(type='text', name='username', value='#{flash.username})
+          .form-group
+            label.col-lg-4.control-label(for='password') #{i18n.getValue("login.password")}
+            .col-lg-8
+              input#password.form-control(type='password', name='password', value='#{flash.password})
+          button.btn.btn-success.pull-right(type='submit') #{i18n.getValue("login.loginNowButton")}
+  

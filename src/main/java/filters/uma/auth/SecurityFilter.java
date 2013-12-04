@@ -14,33 +14,19 @@
  * limitations under the License.
  */
 
-package models.uma;
+package filters.uma.auth;
 
+import ninja.Context;
+import ninja.Filter;
+import ninja.FilterChain;
+import ninja.Result;
 
-public enum Gender {
-	Female(0), Male(1);
-	private int id;
+public class SecurityFilter implements Filter{
 
-	private Gender(int id) {
-		this.id = id;
-	}
+    @Override
+    public Result filter(FilterChain filterChain, Context context) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public static Gender int2Gender(int id) {
-		switch (id) {
-		case 0:
-			return Female;
-		case 1:
-			return Male;
-		default:
-			throw new IllegalArgumentException("Gender ID unknown");
-		}
-	}
 }

@@ -1,0 +1,26 @@
+html
+  body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/') #{i18n.getValue("header.title")}
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href='/') #{i18n.getValue("header.home")}
+          ul.navbar-right.nav.navbar-nav
+            if session.username
+              li
+                a(href='#') #{session.username}
+              li
+                a(href='/article/new') #{i18n.getValue("header.new")}
+              li
+                a(href='/logout') #{i18n.getValue("header.logout")}
+            else
+              li
+                a#login(href='/login') #{i18n.getValue("header.login")}
+        // /.navbar-collapse
