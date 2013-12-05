@@ -18,18 +18,18 @@ package controllers.uma.auth;
 
 import models.uma.User;
 import ninja.Context;
+import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
 import ninja.Router;
 import ninja.params.Param;
 import services.uma.UserService;
-import uma.annotations.LoggedUser;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import controllers.uma.StartController;
-import controllers.uma.user.HomeController;
+import filters.uma.auth.ToHomeFilter;
 
 @Singleton
 public class LoginController {
@@ -43,40 +43,37 @@ public class LoginController {
     @Inject
     private UserService userService;
 
-    public Result doLogin(@LoggedUser User user,
-                          @Param("username") String username,
+    @FilterWith(ToHomeFilter.class)
+    public Result doLogin(@Param("username") String username,
                           @Param("password") String password,
                           Context context) {
-        if (user != null) {
-            // user is authenticated
-            return redirectToHome(user);
-        }
 
-        user = userService.authenticate(username, password);
+        User user = userService.authenticate(username, password);
 
         if (user != null) {
             // set the user in the session
             context.getSessionCookie().put("userId", user.getId().toString());
-            return redirectToHome(user);
+            return redirectToHome();
         }
 
+        // TODO add error messages
         context.getFlashCookie().put("username", username);
         context.getFlashCookie().error("login.error");
         return Results.redirect(LoginController.Method.login.toString());
     }
 
+    @FilterWith(ToHomeFilter.class)
     public Result login() {
         return Results.html();
     }
 
     public Result logout(Context context) {
         context.getSessionCookie().clear();
-        return Results.redirect(router.getReverseRoute(StartController.class,
-                StartController.Method.index.toString()));
+        return redirectToHome();
     }
 
-    private Result redirectToHome(User user) {
-        return Results.redirect(router.getReverseRoute(HomeController.class,
-                HomeController.Method.index.toString()));
+    private Result redirectToHome() {
+        return Results.redirect(router.getReverseRoute(StartController.class,
+                StartController.Method.index.toString()));
     }
 }

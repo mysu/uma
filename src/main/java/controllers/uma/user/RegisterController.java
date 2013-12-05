@@ -27,7 +27,7 @@ import com.google.inject.Singleton;
 import filters.uma.auth.SecurityFilter;
 
 @Singleton
-public class HomeController {
+public class RegisterController {
     public static enum Method{
         index
     }

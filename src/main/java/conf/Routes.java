@@ -26,7 +26,6 @@ import com.google.inject.Inject;
 import controllers.uma.StartController;
 import controllers.uma.api.user.ApiUserController;
 import controllers.uma.auth.LoginController;
-import controllers.uma.user.HomeController;
 
 public class Routes implements ApplicationRoutes {
 
@@ -59,11 +58,6 @@ public class Routes implements ApplicationRoutes {
                 .route("/")
                 .with(StartController.class,
                         StartController.Method.index.toString());
-
-        router.GET()
-                .route("/home/")
-                .with(HomeController.class,
-                        HomeController.Method.index.toString());
 
         router.GET()
                 .route("/login")

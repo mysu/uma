@@ -19,13 +19,9 @@ package controllers.uma;
 import models.uma.User;
 import ninja.Result;
 import ninja.Results;
-import ninja.Router;
 import uma.annotations.LoggedUser;
 
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
-
-import controllers.uma.user.HomeController;
 
 @Singleton
 public class StartController {
@@ -33,18 +29,14 @@ public class StartController {
         index
     }
 
-    @Inject
-    private Router router;
-
     public Result index(@LoggedUser User user) {
         if (user == null) {
             // user not Logged
             return Results.html();
         } else {
             // user logged
-            return Results.redirect(router.getReverseRoute(
-                    HomeController.class,
-                    HomeController.Method.index.toString()));
+            return Results.html().render("userAuth", user)
+                    .template("/views/uma/StartController/home.jade");
         }
     }
 }
