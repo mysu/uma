@@ -16,6 +16,8 @@
 
 package services.uma.impl;
 
+import static uma.utils.StringUtils.*;
+
 import java.util.Collection;
 
 import models.uma.User;
@@ -49,7 +51,7 @@ public class UserServiceImpl implements UserService {
     public User authenticate(String nameOrEmail, String passGiven) {
         User user = getUserByUsernameOrEmail(nameOrEmail);
         if (user != null) {
-            if (passGiven != null && passGiven.equals(user.getPassword()))
+            if (passGiven != null && toSha512(passGiven).equals(user.getPassword()))
                 return user;
         }
         return null;

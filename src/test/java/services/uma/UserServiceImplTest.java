@@ -35,6 +35,8 @@ import services.uma.impl.UserServiceImpl;
 @RunWith(org.mockito.runners.MockitoJUnitRunner.class)
 public class UserServiceImplTest {
     
+    private static final String ADMIN_PASSWORD = "c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec";
+    
     @Mock
     private UserRepository userRepository;
     
@@ -72,12 +74,12 @@ public class UserServiceImplTest {
             @Override
             public User answer(InvocationOnMock invocation) throws Throwable {
                 User user = new User();
-                user.setId(1L).setUsername("anUser").setPassword("123");
+                user.setId(1L).setUsername("anUser").setPassword(ADMIN_PASSWORD);
                 return user;
             }
         });
         
-        assertNotNull(userService.authenticate("anUser", "123"));
+        assertNotNull(userService.authenticate("anUser", "admin"));
         verify(userRepository).getByUsername("anUser");
     }
     
