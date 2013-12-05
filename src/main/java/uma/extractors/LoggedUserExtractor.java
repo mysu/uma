@@ -14,38 +14,47 @@
  * limitations under the License.
  */
 
-package etc;
+package uma.extractors;
 
+import models.uma.User;
 import ninja.Context;
 import ninja.params.ArgumentExtractor;
+import ninja.session.SessionCookie;
+import services.uma.UserService;
 
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
-public class LoggedInUserExtractor implements ArgumentExtractor<String> {
+@Singleton
+public class LoggedUserExtractor implements ArgumentExtractor<User> {
+
+    private UserService userService;
+    
+    @Inject public LoggedUserExtractor(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
-    public String extract(Context context) {
-        
-        // if we got no cookies we break:
-        if (context.getSessionCookie() != null) {
-            
-            String username = context.getSessionCookie().get("username");
-            
-            return username;
-            
+    public User extract(Context context) {
+        SessionCookie sessionCookie = context.getSessionCookie();
+        if (sessionCookie != null) {
+            String userId = sessionCookie.get("userId");
+            if (userId != null) {
+                return userService.getUserById(Long.valueOf(userId));
+            }
         }
-        
+
         return null;
     }
 
     @Override
-    public Class getExtractedType() {
-        return String.class;
+    public Class<User> getExtractedType() {
+        return User.class;
     }
 
     @Override
     public String getFieldName() {
         return null;
     }
-
 
 }

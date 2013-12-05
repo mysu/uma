@@ -14,29 +14,35 @@
  * limitations under the License.
  */
 
-package controllers.uma.api.user;
+package dao.uma.user.impl;
 
-import java.util.Collection;
+import javax.persistence.Query;
+
+import com.google.inject.Singleton;
+import com.google.inject.persist.Transactional;
 
 import models.uma.User;
-import ninja.Result;
-import ninja.Results;
-import services.uma.UserService;
-
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
+import dao.AbstractDao;
+import dao.uma.user.UserDao;
 
 @Singleton
-public class ApiUserController {
-    public static enum Method{
-        listUsers
-    }
+public class UserDaoImpl extends AbstractDao<User> implements UserDao{
     
-    @Inject
-    private UserService userService;
-    
-    public Result listUsers(){
-        Collection<User> users = userService.getUserList(0, null);
-        return Results.json().render(users);
+    private static final String getByUsername= "select u from User u where u.username = :userName";
+
+	@Override
+	protected Class<User> getEntityClass() {
+		return User.class;
+	}
+
+    @Override
+    @Transactional
+    public User getByUsername(String username) {
+        Query query = super.createQuery(getByUsername);
+        query.setParameter("userName", username);
+        return (User) getSingleResult(query);
     }
+	
+	
+
 }

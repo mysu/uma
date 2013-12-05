@@ -13,11 +13,9 @@ html
             li.active
               a(href='/') #{i18n.getValue("header.home")}
           ul.navbar-right.nav.navbar-nav
-            if session.username
+            if userAuth
               li
-                a(href='#') #{session.username}
-              li
-                a(href='/article/new') #{i18n.getValue("header.new")}
+                a(href='#') #{userAuth.username}
               li
                 a(href='/logout') #{i18n.getValue("header.logout")}
             else

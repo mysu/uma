@@ -23,10 +23,13 @@ import ninja.utils.NinjaProperties;
 
 import com.google.inject.Inject;
 
+import controllers.uma.StartController;
 import controllers.uma.api.user.ApiUserController;
+import controllers.uma.auth.LoginController;
+import controllers.uma.user.HomeController;
 
 public class Routes implements ApplicationRoutes {
-    
+
     @Inject
     NinjaProperties ninjaProperties;
 
@@ -40,20 +43,45 @@ public class Routes implements ApplicationRoutes {
      *            The default router of this application
      */
     @Override
-    public void init(Router router) {  
-        
- 
-        ///////////////////////////////////////////////////////////////////////
+    public void init(Router router) {
+
+        // /////////////////////////////////////////////////////////////////////
         // Assets (pictures / javascript)
-        ///////////////////////////////////////////////////////////////////////    
+        // /////////////////////////////////////////////////////////////////////
         router.GET().route("/assets/.*").with(AssetsController.class, "serve");
-        
-        ///////////////////////////////////////////////////////////////////////
+
+        // /////////////////////////////////////////////////////////////////////
         // Index / Catchall shows index page
-        ///////////////////////////////////////////////////////////////////////
-//        router.GET().route("/.*").with(ApplicationController.class, "index");
-        
-        router.GET().route("/api/users").with(ApiUserController.class, "listUsers");
+        // /////////////////////////////////////////////////////////////////////
+        // router.GET().route("/.*").with(ApplicationController.class, "index");
+
+        router.GET()
+                .route("/")
+                .with(StartController.class,
+                        StartController.Method.index.toString());
+
+        router.GET()
+                .route("/home/")
+                .with(HomeController.class,
+                        HomeController.Method.index.toString());
+
+        router.GET()
+                .route("/login")
+                .with(LoginController.class,
+                        LoginController.Method.login.toString());
+        router.POST()
+                .route("/login")
+                .with(LoginController.class,
+                        LoginController.Method.doLogin.toString());
+        router.GET()
+                .route("/logout")
+                .with(LoginController.class,
+                        LoginController.Method.logout.toString());
+
+        router.GET()
+                .route("/api/users")
+                .with(ApiUserController.class,
+                        ApiUserController.Method.listUsers.toString());
     }
 
 }

@@ -22,6 +22,7 @@ import services.uma.CacheServiceFactory;
 import services.uma.CachingService;
 import services.uma.UserService;
 import services.uma.impl.UserServiceImpl;
+import co.leugim.jade4ninja.Jade4NinjaModule;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Injector;
@@ -29,12 +30,15 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 
 import dao.uma.user.UserDao;
-import dao.uma.user.UserDaoImpl;
+import dao.uma.user.impl.UserDaoImpl;
 
 @Singleton
 public class Module extends AbstractModule {
   
     protected void configure() {
+        
+        install(new Jade4NinjaModule());
+        
         // 1.
         bindDAOs();
         // 2.

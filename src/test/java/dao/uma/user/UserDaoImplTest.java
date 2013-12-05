@@ -24,6 +24,8 @@ import ninja.NinjaDaoTestBase;
 import org.junit.Before;
 import org.junit.Test;
 
+import dao.uma.user.impl.UserDaoImpl;
+
 public class UserDaoImplTest extends NinjaDaoTestBase {
     
     private UserDaoImpl userDao;

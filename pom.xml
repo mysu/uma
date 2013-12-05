@@ -24,13 +24,13 @@
   <artifactId>uma</artifactId>
   <packaging>war</packaging>
   <groupId>co.leugim.mysu</groupId>
-  <version>0.1-alpha</version>
+  <version>0.1.0-alpha</version>
 
   <url>http://www.ninjaframework.org</url>
 
 
   <properties>
-    <ninja.version>2.2.0-SNAPSHOT</ninja.version>
+    <ninja.version>2.3.0</ninja.version>
     <jetty.version>9.0.5.v20130815</jetty.version>
   </properties>
 
@@ -40,7 +40,7 @@
       <url>https://raw.github.com/emiguelt/jade4ninja/mvn-repo/</url>
       <snapshots>
         <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
+        <updatePolicy>daily</updatePolicy>
       </snapshots>
     </repository>
   </repositories>
@@ -92,7 +92,7 @@
           <stopKey>stop</stopKey>
           <stopPort>8889</stopPort>
           <scanIntervalSeconds>1</scanIntervalSeconds>
-          <reload>automatic</reload>
+          <reload>manual</reload>
           <scanTargetPatterns>
             <scanTargetPattern>
               <directory>target/classes</directory>
@@ -100,6 +100,7 @@
                 <include>**/*</include>
               </includes>
               <excludes>
+                <exclude>**/*.jade</exclude>
                 <exclude>**/*.ftl.html</exclude>
                 <exclude>assets/**</exclude>
               </excludes>
@@ -212,7 +213,7 @@
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>bootstrap</artifactId>
-      <version>3.0.0</version>
+      <version>3.0.2</version>
     </dependency>
 
 
@@ -256,8 +257,8 @@
 
     <dependency>
       <groupId>org.ninjaframework</groupId>
-      <artifactId>jade4ninja</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <artifactId>jade4ninja-module</artifactId>
+      <version>0.1.0</version>
       <exclusions>
         <exclusion>
           <artifactId>commons-logging</artifactId>
@@ -267,7 +268,5 @@
     </dependency>
 
   </dependencies>
-
-
 
 </project>

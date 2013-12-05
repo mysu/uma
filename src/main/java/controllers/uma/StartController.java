@@ -14,29 +14,37 @@
  * limitations under the License.
  */
 
-package controllers.uma.api.user;
-
-import java.util.Collection;
+package controllers.uma;
 
 import models.uma.User;
 import ninja.Result;
 import ninja.Results;
-import services.uma.UserService;
+import ninja.Router;
+import uma.annotations.LoggedUser;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import controllers.uma.user.HomeController;
+
 @Singleton
-public class ApiUserController {
-    public static enum Method{
-        listUsers
+public class StartController {
+    public static enum Method {
+        index
     }
-    
+
     @Inject
-    private UserService userService;
-    
-    public Result listUsers(){
-        Collection<User> users = userService.getUserList(0, null);
-        return Results.json().render(users);
+    private Router router;
+
+    public Result index(@LoggedUser User user) {
+        if (user == null) {
+            // user not Logged
+            return Results.html();
+        } else {
+            // user logged
+            return Results.redirect(router.getReverseRoute(
+                    HomeController.class,
+                    HomeController.Method.index.toString()));
+        }
     }
 }

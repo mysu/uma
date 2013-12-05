@@ -20,13 +20,31 @@ import ninja.Context;
 import ninja.Filter;
 import ninja.FilterChain;
 import ninja.Result;
+import ninja.Results;
+import ninja.Router;
+import ninja.session.SessionCookie;
 
-public class SecurityFilter implements Filter{
+import com.google.inject.Inject;
+
+import controllers.uma.StartController;
+
+public class SecurityFilter implements Filter {
+
+    @Inject
+    private Router router;
 
     @Override
     public Result filter(FilterChain filterChain, Context context) {
-        // TODO Auto-generated method stub
-        return null;
+        SessionCookie sessionCookie = context.getSessionCookie();
+        if (sessionCookie != null) {
+            if (sessionCookie.get("userId") != null) {
+                return filterChain.next(context);
+            }
+        }
+
+        // user is not logged
+        return Results.redirect(router.getReverseRoute(StartController.class,
+                StartController.Method.index.toString()));
     }
 
 }
