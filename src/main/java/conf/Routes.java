@@ -26,6 +26,7 @@ import com.google.inject.Inject;
 import controllers.uma.StartController;
 import controllers.uma.api.user.ApiUserController;
 import controllers.uma.auth.LoginController;
+import controllers.uma.user.RegisterController;
 
 public class Routes implements ApplicationRoutes {
 
@@ -71,6 +72,14 @@ public class Routes implements ApplicationRoutes {
                 .route("/logout")
                 .with(LoginController.class,
                         LoginController.Method.logout.toString());
+        router.GET()
+                .route("/register")
+                .with(RegisterController.class,
+                        RegisterController.Method.index.toString());
+        router.POST()
+                .route("/register")
+                .with(RegisterController.class,
+                        RegisterController.Method.postRegister.toString());
 
         router.GET()
                 .route("/api/users")

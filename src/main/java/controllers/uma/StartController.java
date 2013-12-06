@@ -19,9 +19,10 @@ package controllers.uma;
 import models.uma.User;
 import ninja.Result;
 import ninja.Results;
-import uma.annotations.LoggedUser;
 
 import com.google.inject.Singleton;
+
+import etc.uma.annotations.LoggedUser;
 
 @Singleton
 public class StartController {

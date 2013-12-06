@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uma.utils;
+package etc.uma.utils;
 
 import org.apache.commons.codec.digest.DigestUtils;
 

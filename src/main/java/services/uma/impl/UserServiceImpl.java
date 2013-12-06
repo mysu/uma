@@ -16,7 +16,7 @@
 
 package services.uma.impl;
 
-import static uma.utils.StringUtils.*;
+import static etc.uma.utils.StringUtils.*;
 
 import java.util.Collection;
 

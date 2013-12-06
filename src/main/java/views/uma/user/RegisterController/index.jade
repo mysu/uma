@@ -1,0 +1,27 @@
+extend ../../../layout/defaultLayout
+block params
+  - title= i18n.value("registerUser.title")
+
+block content
+  .row.col-md-4.center-block
+    h1 #{i18n.value("registerUser.title")}
+    form.form-horizontal(role='form')
+      .form-group
+        label.control-label.col-sm-4(for='username') #{i18n.value("registerUser.username")}
+        .col-sm-8
+          input.form-control#username(type='text')
+      .form-group
+        label.control-label.col-sm-4(for='email') #{i18n.value("registerUser.email")}
+        .col-sm-8
+          input.form-control#email(type='text')
+      .form-group
+        label.control-label.col-sm-4(for='password') #{i18n.value("registerUser.password")}
+        .col-sm-8
+          input.form-control#password(type='text')
+      .form-group
+        label.control-label.col-sm-4(for='password-retype') #{i18n.value("registerUser.retypePass")}
+        .col-sm-8
+          input.form-control#password-retype(type='text')
+      .form-group
+        .col-sm-offset-4.col-sm-8
+          button.btn.btn-default #{i18n.value("registerUser.sendButton")}

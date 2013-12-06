@@ -16,24 +16,29 @@
 
 package controllers.uma.user;
 
-import models.uma.User;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
-import uma.annotations.LoggedUser;
 
 import com.google.inject.Singleton;
 
-import filters.uma.auth.SecurityFilter;
+import etc.uma.dto.UserDto;
+import filters.uma.auth.ToHomeFilter;
 
 @Singleton
 public class RegisterController {
     public static enum Method{
-        index
+        index, postRegister
     }
 
-    @FilterWith(SecurityFilter.class)
-    public Result index(@LoggedUser User user){
-        return Results.html().render("userAuth", user);
+    @FilterWith(ToHomeFilter.class)
+    public Result index(){
+        //show form
+        return Results.html();
+    }
+    
+    @FilterWith(ToHomeFilter.class)
+    public Result postRegister(UserDto userDto){
+        return null;
     }
 }
