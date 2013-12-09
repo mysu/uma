@@ -1,12 +1,12 @@
 /**
  * 
  */
-define([jquery, backbone, json!registerUser], 
+define(['jquery', 'backbone', 'json!locale/registerUser.json'], 
     function($, Backbone, messages){
 
   var RegisterUserView = Backbone.View.extend({
     
   });
   
-  return RegisterView;
+  return RegisterUserView;
 });

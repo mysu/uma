@@ -1,9 +1,9 @@
 {
-  error_username_not_valid: 'Username not valid, it must have at leas 6 characters (. and _ can be used too)',
-  error_username_forbidden: 'Username exists or is forbidden',
-  error_email_not_valid: 'Please add a valid email (like anUser@domain.com)',
-  error_email_forbidden: 'Email exists or is forbidden',
-  error_password_tooshort: 'Type a password of at least 6 characters',
-  error_password_notthesame: 'Passwords do not match',
-  error_agree_terms: 'You must agree with the terms to create the account'
+  "error_username_not_valid": "Username not valid, it must have at leas 6 characters (. and _ can be used too)",
+  "error_username_forbidden": "Username exists or is forbidden",
+  "error_email_not_valid": "Please add a valid email (like anUser@domain.com)",
+  "error_email_forbidden": "Email exists or is forbidden",
+  "error_password_tooshort": "Type a password of at least 6 characters",
+  "error_password_notthesame": "Passwords do not match",
+  "error_agree_terms": "You must agree with the terms to create the account"
 }
