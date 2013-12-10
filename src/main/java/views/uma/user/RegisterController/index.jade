@@ -9,7 +9,7 @@ block content
       .form-group
         label.control-label.col-sm-4(for='username') #{i18n.value("registerUser.username")}
         .col-sm-8
-          input.form-control#username(type='text', minlength='6', required)
+          input.form-control#username(type='text', name='username', minlength='6', required, remote='api/validuser')
       .form-group
         label.control-label.col-sm-4(for='email') #{i18n.value("registerUser.email")}
         .col-sm-8

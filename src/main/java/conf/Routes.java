@@ -85,6 +85,11 @@ public class Routes implements ApplicationRoutes {
                 .route("/api/users")
                 .with(ApiUserController.class,
                         ApiUserController.Method.listUsers.toString());
+
+        router.GET()
+                .route("/api/validuser")
+                .with(ApiUserController.class,
+                        ApiUserController.Method.validUser.toString());
     }
 
 }

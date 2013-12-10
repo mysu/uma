@@ -21,6 +21,7 @@ import java.util.Collection;
 import models.uma.User;
 import ninja.Result;
 import ninja.Results;
+import ninja.params.Param;
 import services.uma.UserService;
 
 import com.google.inject.Inject;
@@ -29,7 +30,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class ApiUserController {
     public static enum Method{
-        listUsers
+        listUsers, validUser
     }
     
     @Inject
@@ -38,5 +39,10 @@ public class ApiUserController {
     public Result listUsers(){
         Collection<User> users = userService.getUserList(0, null);
         return Results.json().render(users);
+    }
+    
+    public Result validUser(@Param("username") String username){
+        User user = userService.getUserByUsernameOrEmail(username);
+        return Results.json().render(user==null);
     }
 }
