@@ -23,7 +23,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class StringUtils {
     
     private static final Pattern validEmailPattern = Pattern.compile("(^([0-9a-zA-Z]+([+-._][0-9a-zA-Z]+)*@[0-9a-zA-Z]+([+-._][0-9a-zA-Z]+)*[.][a-zA-Z]{2,9})$)");
-    private static final Pattern validUsername = Pattern.compile("((^([0-9a-zA-Z]+([+-._][0-9a-zA-Z]+)*)+6");
+    private static final Pattern validUsername = Pattern.compile("^([0-9a-zA-Z]+([+-._][0-9a-zA-Z]+)*)+6");
     
     private StringUtils() {}
     

@@ -14,6 +14,9 @@ define([ 'jquery', 'jquery.validate', 'backbone',
         messages : {
           username : {
             remote : i18n['error_username_forbidden']
+          },
+          email: {
+            remote: i18n['error_email_forbidden']
           }
         }
       });

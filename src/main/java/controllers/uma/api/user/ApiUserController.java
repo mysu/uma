@@ -30,7 +30,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class ApiUserController {
     public static enum Method{
-        listUsers, validUser
+        listUsers, validUser, validEmail
     }
     
     @Inject
@@ -43,6 +43,12 @@ public class ApiUserController {
     
     public Result validUser(@Param("username") String username){
         User user = userService.getUserByUsernameOrEmail(username);
+        return Results.json().render(user==null);
+    }
+    
+
+    public Result validEmail(@Param("email") String email){
+        User user = userService.getUserByUsernameOrEmail(email);
         return Results.json().render(user==null);
     }
 }
