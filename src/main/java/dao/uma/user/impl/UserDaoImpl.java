@@ -42,6 +42,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
         query.setParameter("userName", username);
         return (User) getSingleResult(query);
     }
+
 	
 	
 

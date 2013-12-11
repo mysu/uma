@@ -43,7 +43,7 @@ public class Email implements Cacheable<Long> {
     @Column(name="eml_email", unique = true, nullable = false)
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,optional=false)
     private User user;
 
     public Long getId() {
@@ -72,6 +72,15 @@ public class Email implements Cacheable<Long> {
     @Override
     public Class<?> getType() {
         return Email.class;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Email setUser(User user) {
+        this.user = user;
+        return this;
     }
 
 }

@@ -18,6 +18,7 @@ package repository.uma.impl;
 
 import java.util.Collection;
 
+import models.uma.Email;
 import models.uma.User;
 import repository.uma.AbstractRepository;
 import repository.uma.UserRepository;
@@ -25,6 +26,7 @@ import repository.uma.UserRepository;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import dao.uma.user.EmailDao;
 import dao.uma.user.UserDao;
 
 @Singleton
@@ -32,6 +34,8 @@ public class UserRepositoryImpl extends AbstractRepository<User, Long>implements
     
     @Inject
     private UserDao userDao;
+    @Inject
+    private EmailDao emailDao;
 
     @Override
     public Collection<User> getList(int offset, Integer limit) {
@@ -58,6 +62,15 @@ public class UserRepositoryImpl extends AbstractRepository<User, Long>implements
     @Override
     protected Class<User> getType() {
         return User.class;
+    }
+
+    @Override
+    public User getByEmail(String usernameOrEmail) {
+        Email email = emailDao.getByEmail(usernameOrEmail);
+        if(email!=null)
+            return email.getUser();
+            
+        return null;
     }
 
 

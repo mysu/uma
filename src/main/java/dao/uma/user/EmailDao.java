@@ -14,22 +14,15 @@
  * limitations under the License.
  */
 
-package repository.uma;
+package dao.uma.user;
 
 import java.util.Collection;
 
-import models.uma.User;
+import models.uma.Email;
 
-public interface UserRepository {
-
-    Collection<User> getList(int offset, Integer limit);
-
-    User getById(Long id);
-
-    User save(User user);
-
-    User getByUsername(String username);
-
-    User getByEmail(String usernameOrEmail);
-
+public interface EmailDao {
+    Collection<Email> getList(int offset, Integer limit);
+    Email get(long id);
+    Email save(Email Email);
+    Email getByEmail(String email);
 }

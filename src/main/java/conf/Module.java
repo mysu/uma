@@ -29,7 +29,9 @@ import com.google.inject.Injector;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 
+import dao.uma.user.EmailDao;
 import dao.uma.user.UserDao;
+import dao.uma.user.impl.EmailDaoImpl;
 import dao.uma.user.impl.UserDaoImpl;
 
 @Singleton
@@ -60,6 +62,7 @@ public class Module extends AbstractModule {
 
     private void bindDAOs() {
         bind(UserDao.class).to(UserDaoImpl.class);
+        bind(EmailDao.class).to(EmailDaoImpl.class);
     }
 
     @Provides
