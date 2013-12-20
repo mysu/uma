@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package uma.annotations;
+package etc.uma.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import uma.extractors.LoggedUserExtractor;
+import etc.uma.extractors.LoggedUserExtractor;
 import ninja.params.WithArgumentExtractor;
 
 @WithArgumentExtractor(LoggedUserExtractor.class)

@@ -18,6 +18,7 @@ package services.uma;
 
 import java.util.Collection;
 
+import etc.uma.dto.RegisterUserDto;
 import models.uma.User;
 
 public interface UserService {
@@ -26,4 +27,5 @@ public interface UserService {
     User saveUser(User user);
     User authenticate(String nameOrEmail, String passGiven);
     User getUserByUsernameOrEmail(String string);
+    User registerUser(RegisterUserDto userDto);
 }

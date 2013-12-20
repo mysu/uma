@@ -16,7 +16,9 @@
 
 package conf;
 
+import repository.uma.EmailRepository;
 import repository.uma.UserRepository;
+import repository.uma.impl.EmailRepositoryImpl;
 import repository.uma.impl.UserRepositoryImpl;
 import services.uma.CacheServiceFactory;
 import services.uma.CachingService;
@@ -29,7 +31,9 @@ import com.google.inject.Injector;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 
+import dao.uma.user.EmailDao;
 import dao.uma.user.UserDao;
+import dao.uma.user.impl.EmailDaoImpl;
 import dao.uma.user.impl.UserDaoImpl;
 
 @Singleton
@@ -56,10 +60,12 @@ public class Module extends AbstractModule {
 
     private void bindRepos() {
         bind(UserRepository.class).to(UserRepositoryImpl.class);
+        bind(EmailRepository.class).to(EmailRepositoryImpl.class);
     }
 
     private void bindDAOs() {
         bind(UserDao.class).to(UserDaoImpl.class);
+        bind(EmailDao.class).to(EmailDaoImpl.class);
     }
 
     @Provides

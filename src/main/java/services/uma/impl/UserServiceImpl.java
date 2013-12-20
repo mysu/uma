@@ -16,20 +16,27 @@
 
 package services.uma.impl;
 
-import static uma.utils.StringUtils.*;
+import static etc.uma.utils.StringUtils.toSha512;
 
 import java.util.Collection;
 
+import models.uma.Email;
 import models.uma.User;
+import repository.uma.EmailRepository;
 import repository.uma.UserRepository;
 import services.uma.UserService;
 
 import com.google.inject.Inject;
 
+import etc.uma.dto.RegisterUserDto;
+import etc.uma.utils.StringUtils;
+
 public class UserServiceImpl implements UserService {
     private final static int LIMIT_DEFAULT = 10;
     @Inject
     private UserRepository userRepository;
+    @Inject
+    private EmailRepository emailRepository;
 
     @Override
     public User getUserById(long id) {
@@ -38,8 +45,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Collection<User> getUserList(int offset, Integer limit) {
-        return userRepository.getList(offset, (limit != null && limit > 0) ? limit
-                : LIMIT_DEFAULT);
+        return userRepository.getList(offset,
+                (limit != null && limit > 0) ? limit : LIMIT_DEFAULT);
     }
 
     @Override
@@ -51,16 +58,39 @@ public class UserServiceImpl implements UserService {
     public User authenticate(String nameOrEmail, String passGiven) {
         User user = getUserByUsernameOrEmail(nameOrEmail);
         if (user != null) {
-            if (passGiven != null && toSha512(passGiven).equals(user.getPassword()))
+            if (passGiven != null
+                    && toSha512(passGiven).equals(user.getPassword()))
                 return user;
         }
         return null;
     }
 
     @Override
-    //TODO finish this feature, add email support
-    public User getUserByUsernameOrEmail(String userName) {
-        return userRepository.getByUsername(userName);
+    public User getUserByUsernameOrEmail(String usernameOrEmail) {
+        if (StringUtils.isValidEmail(usernameOrEmail)) {
+            return userRepository.getByEmail(usernameOrEmail);
+        }
+
+        return userRepository.getByUsername(usernameOrEmail);
+    }
+
+    @Override
+    public User registerUser(RegisterUserDto userDto) {
+        if (getUserByUsernameOrEmail(userDto.username) == null
+                && getUserByUsernameOrEmail(userDto.email) == null) {
+            User user = new User().setUsername(userDto.username).setPassword(StringUtils.toSha512(userDto.password));
+            
+            user = userRepository.save(user);
+            Email email = new Email().setEmail(userDto.email).setUser(user);
+            email = emailRepository.save(email);
+            
+            user.addEmail(email);
+            
+            return user;
+        }
+        return null;
+
     }
 
 }
+

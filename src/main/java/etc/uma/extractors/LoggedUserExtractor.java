@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uma.extractors;
+package etc.uma.extractors;
 
 import models.uma.User;
 import ninja.Context;

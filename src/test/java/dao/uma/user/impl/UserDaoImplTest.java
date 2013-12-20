@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package dao.uma.user;
+package dao.uma.user.impl;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -53,4 +53,5 @@ public class UserDaoImplTest extends NinjaDaoTestBase {
     public void shouldReturnNullWhenUsernameNotExists() {
         assertNull(userDao.getByUsername("aName"));
     }
+    
 }

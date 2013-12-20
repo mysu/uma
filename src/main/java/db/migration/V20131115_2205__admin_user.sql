@@ -1,8 +1,6 @@
 --
 --
 
-UPDATE uma_user
-
 INSERT INTO uma_user(usr_username, usr_password)
     VALUES ('admin', 'admin');
             

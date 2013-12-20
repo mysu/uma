@@ -21,35 +21,30 @@ import javax.persistence.Query;
 import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
 
-import models.uma.User;
+import models.uma.Email;
 import dao.AbstractDao;
-import dao.uma.user.UserDao;
+import dao.uma.user.EmailDao;
 
 @Singleton
-public class UserDaoImpl extends AbstractDao<User> implements UserDao{
-    
-    private static final String getByUsername= "select u from User u where u.username = :userName";
-
-	@Override
-	protected Class<User> getEntityClass() {
-		return User.class;
-	}
+public class EmailDaoImpl extends AbstractDao<Email> implements EmailDao {
+    private static final String getByEmail = "select em from Email em where em.email = :email";
 
     @Override
-    @Transactional
-    public User getByUsername(String username) {
-        Query query = super.createQuery(getByUsername);
-        query.setParameter("userName", username);
-        return (User) getSingleResult(query);
+    public Email getByEmail(String email) {
+        Query query = super.createQuery(getByEmail);
+        query.setParameter("email", email);
+        return (Email) getSingleResult(query);
+    }
+
+    @Override
+    protected Class<Email> getEntityClass() {
+        return Email.class;
     }
     
     @Override
     @Transactional
-    public User save(User entity) {
+    public Email save(Email entity) {
         return super.save(entity);
     }
-
-	
-	
 
 }

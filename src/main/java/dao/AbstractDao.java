@@ -71,6 +71,7 @@ public abstract class AbstractDao<T> {
     }
     
     @SuppressWarnings("unchecked")
+    @Transactional
     protected T getSingleResult(Query query){
         try {
             return (T)query.getSingleResult();            

@@ -17,23 +17,55 @@
 package controllers.uma.user;
 
 import models.uma.User;
+import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
 import ninja.Results;
-import uma.annotations.LoggedUser;
+import ninja.i18n.Lang;
+import ninja.i18n.Messages;
+import services.uma.UserService;
 
+import com.google.common.base.Optional;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import filters.uma.auth.SecurityFilter;
+import etc.uma.dto.RegisterUserDto;
+import etc.uma.utils.LoginHelper;
+import filters.uma.auth.ToHomeFilter;
 
 @Singleton
 public class RegisterController {
-    public static enum Method{
-        index
+    public static enum Method {
+        index, postRegister
     }
 
-    @FilterWith(SecurityFilter.class)
-    public Result index(@LoggedUser User user){
-        return Results.html().render("userAuth", user);
+    @Inject
+    UserService userService;
+
+    @Inject
+    Messages i18n;
+    @Inject
+    Lang lang;
+
+    @FilterWith(ToHomeFilter.class)
+    public Result index() {
+        // show form
+        return Results.html();
+    }
+
+    @FilterWith(ToHomeFilter.class)
+    public Result postRegister(RegisterUserDto userDto, Context context) {
+        User newUser = userService.registerUser(userDto);
+        if (newUser != null) {
+            // user registered
+            LoginHelper.addUserToSession(newUser, context);
+            return Results.json().render("success", true);
+        }
+
+        return Results
+                .json()
+                .render("success", false)
+                .render("error",
+                        i18n.get("registerUser.generalError", Optional.of("en")));
     }
 }

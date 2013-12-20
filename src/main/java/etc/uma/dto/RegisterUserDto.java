@@ -14,22 +14,11 @@
  * limitations under the License.
  */
 
-package repository.uma;
+package etc.uma.dto;
 
-import java.util.Collection;
-
-import models.uma.User;
-
-public interface UserRepository {
-
-    Collection<User> getList(int offset, Integer limit);
-
-    User getById(Long id);
-
-    User save(User user);
-
-    User getByUsername(String username);
-
-    User getByEmail(String usernameOrEmail);
-
+public class RegisterUserDto {
+    public String username;
+    public String email;
+    public String password;
+    public String password_retype;
 }
