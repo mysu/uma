@@ -289,7 +289,7 @@
     <dependency>
       <groupId>org.ninjaframework</groupId>
       <artifactId>jade4ninja-module</artifactId>
-      <version>0.1.0</version>
+      <version>0.2.0</version>
       <exclusions>
         <exclusion>
           <artifactId>commons-logging</artifactId>
