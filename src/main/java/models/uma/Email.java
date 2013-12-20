@@ -22,6 +22,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -36,14 +37,15 @@ public class Email implements Cacheable<Long> {
     private static final long serialVersionUID = 1725587779039132112L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="eml_id")
     private Long id;
 
     @Column(name="eml_email", unique = true, nullable = false)
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional=false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="eml_user_id")
     private User user;
 
     public Long getId() {

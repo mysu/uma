@@ -28,7 +28,9 @@ import services.uma.UserService;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import controllers.uma.ControllerHelper;
 import controllers.uma.StartController;
+import etc.uma.utils.LoginHelper;
 import filters.uma.auth.ToHomeFilter;
 
 @Singleton
@@ -51,9 +53,8 @@ public class LoginController {
         User user = userService.authenticate(username, password);
 
         if (user != null) {
-            // set the user in the session
-            context.getSessionCookie().put("userId", user.getId().toString());
-            return redirectToHome();
+            LoginHelper.addUserToSession(user, context);
+            return ControllerHelper.redirectToHome(router);
         }
 
         // TODO add error messages
@@ -69,11 +70,7 @@ public class LoginController {
 
     public Result logout(Context context) {
         context.getSessionCookie().clear();
-        return redirectToHome();
+        return ControllerHelper.redirectToHome(router);
     }
 
-    private Result redirectToHome() {
-        return Results.redirect(router.getReverseRoute(StartController.class,
-                StartController.Method.index.toString()));
-    }
 }

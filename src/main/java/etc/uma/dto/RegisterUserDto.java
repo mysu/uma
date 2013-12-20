@@ -16,6 +16,9 @@
 
 package etc.uma.dto;
 
-public class UserDto {
-
+public class RegisterUserDto {
+    public String username;
+    public String email;
+    public String password;
+    public String password_retype;
 }

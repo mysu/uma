@@ -16,12 +16,19 @@
 
 package models.uma;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.google.common.collect.Lists;
 
 import services.uma.Cacheable;
 
@@ -35,7 +42,7 @@ public class User implements Cacheable<Long> {
     private static final long serialVersionUID = 8536322154189025203L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="usr_id")
     private Long id;
 
@@ -54,7 +61,12 @@ public class User implements Cacheable<Long> {
     @Column(name="usr_gender" )
     private Gender gender;
     
-    //TODO add default email
+    @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+    private List<Email> emailList;
+    
+    public User() {
+        emailList = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;
@@ -118,6 +130,19 @@ public class User implements Cacheable<Long> {
     @Override
     public Class<?> getType() {
         return User.class;
+    }
+
+    public List<Email> getEmailList() {
+        return Lists.newArrayList(emailList);
+    }
+
+    public void setEmailList(List<Email> emailList) {
+        this.emailList.addAll(emailList);
+    }
+
+    public User addEmail(Email email) {
+        emailList.add(email);
+        return this;
     }
 
 }

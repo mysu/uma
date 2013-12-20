@@ -16,7 +16,9 @@
 
 package conf;
 
+import repository.uma.EmailRepository;
 import repository.uma.UserRepository;
+import repository.uma.impl.EmailRepositoryImpl;
 import repository.uma.impl.UserRepositoryImpl;
 import services.uma.CacheServiceFactory;
 import services.uma.CachingService;
@@ -58,6 +60,7 @@ public class Module extends AbstractModule {
 
     private void bindRepos() {
         bind(UserRepository.class).to(UserRepositoryImpl.class);
+        bind(EmailRepository.class).to(EmailRepositoryImpl.class);
     }
 
     private void bindDAOs() {
