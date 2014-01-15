@@ -1,6 +1,7 @@
 extend ../../layout/defaultLayout
 block params
-  - title="Login"
+  - title="Home"
 
 block content
-  h1 uhu! you are now logged-in #{userAuth.firstName}
+  h1 uhu! you are now logged-in #{user.firstName}
+  script(data-main='/assets/js/home', src='/assets/webjars/requirejs/2.1.8/require.js')

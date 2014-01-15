@@ -36,7 +36,7 @@ public class StartController {
             return Results.html();
         } else {
             // user logged
-            return Results.html().render("userAuth", user)
+            return Results.html().render("user", user)
                     .template("/views/uma/StartController/home.jade");
         }
     }

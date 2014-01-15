@@ -2,8 +2,6 @@ block params
 !!! 5
 html(lang='en')
   head
-    script(src='/assets/webjars/jquery/2.0.3/jquery.js')
-    script(src='/assets/webjars/jquery-validation/1.11.1/jquery.validate.js')
     meta(charset='utf-8')
     title #{title}
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
@@ -36,6 +34,7 @@ html(lang='en')
       block content
 
       include footer
+      
+      if user
+        include ../uma/commons/userSettings
     // /container
-    script(type='text/javascript', src='/assets/webjars/tinymce-jquery/3.4.9/jscripts/tiny_mce/tiny_mce.js')
-    script(src='/assets/webjars/bootstrap/3.0.2/js/bootstrap.min.js')

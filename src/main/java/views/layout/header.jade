@@ -13,7 +13,7 @@ html
             li.active
               a(href='/') #{i18n.value("header.home")}
           ul.navbar-right.nav.navbar-nav
-            if userAuth
+            if user
               include headerLogged
             else
               li
