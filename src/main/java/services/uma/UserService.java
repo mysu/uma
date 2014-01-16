@@ -18,6 +18,7 @@ package services.uma;
 
 import java.util.Collection;
 
+import etc.uma.dto.BasicInfoDto;
 import etc.uma.dto.RegisterUserDto;
 import models.uma.User;
 
@@ -28,4 +29,5 @@ public interface UserService {
     User authenticate(String nameOrEmail, String passGiven);
     User getUserByUsernameOrEmail(String string);
     User registerUser(RegisterUserDto userDto);
+    boolean updateBasicInfo(BasicInfoDto bInfo);
 }

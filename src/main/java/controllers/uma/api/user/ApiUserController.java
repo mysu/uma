@@ -19,6 +19,7 @@ package controllers.uma.api.user;
 import java.util.Collection;
 
 import models.uma.User;
+import ninja.Context;
 import ninja.Result;
 import ninja.Results;
 import ninja.params.Param;
@@ -27,28 +28,34 @@ import services.uma.UserService;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import etc.uma.dto.BasicInfoDto;
+
 @Singleton
 public class ApiUserController {
-    public static enum Method{
-        listUsers, validUser, validEmail
+    public static enum Method {
+        listUsers, validUser, validEmail, updateBasicInfo
     }
-    
+
     @Inject
     private UserService userService;
-    
-    public Result listUsers(){
+
+    public Result listUsers() {
         Collection<User> users = userService.getUserList(0, null);
         return Results.json().render(users);
     }
-    
-    public Result validUser(@Param("username") String username){
-        User user = userService.getUserByUsernameOrEmail(username);
-        return Results.json().render(user==null);
-    }
-    
 
-    public Result validEmail(@Param("email") String email){
+    public Result validUser(@Param("username") String username) {
+        User user = userService.getUserByUsernameOrEmail(username);
+        return Results.json().render(user == null);
+    }
+
+    public Result validEmail(@Param("email") String email) {
         User user = userService.getUserByUsernameOrEmail(email);
-        return Results.json().render(user==null);
+        return Results.json().render(user == null);
+    }
+
+    public Result updateBasicInfo(BasicInfoDto basic, Context ctx) {
+        return Results.json().render("success",
+                userService.updateBasicInfo(basic));
     }
 }

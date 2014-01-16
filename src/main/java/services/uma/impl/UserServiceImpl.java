@@ -20,6 +20,8 @@ import static etc.uma.utils.StringUtils.toSha512;
 
 import java.util.Collection;
 
+import org.omg.CORBA.UserException;
+
 import models.uma.Email;
 import models.uma.User;
 import repository.uma.EmailRepository;
@@ -28,6 +30,7 @@ import services.uma.UserService;
 
 import com.google.inject.Inject;
 
+import etc.uma.dto.BasicInfoDto;
 import etc.uma.dto.RegisterUserDto;
 import etc.uma.utils.StringUtils;
 
@@ -89,7 +92,18 @@ public class UserServiceImpl implements UserService {
             return user;
         }
         return null;
-
+    }
+    
+    @Override
+    public boolean updateBasicInfo(BasicInfoDto bInfo){
+        User user = userRepository.getById(Long.valueOf(bInfo.id));
+        String hashPass = StringUtils.toSha512(bInfo.currPassword);
+        if(user.getPassword().equals(hashPass)){
+            user.setPassword(StringUtils.toSha512(bInfo.password));
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 
 }

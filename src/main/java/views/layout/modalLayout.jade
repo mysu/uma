@@ -1,12 +1,12 @@
 block param
 // Modal
-.modal.fade(id="#{modalId}", tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+.modal.fade(id="#{modalId}", tabindex='-1', role='dialog', aria-labelledby="#{modalId}Label", aria-hidden='true')
   .modal-dialog
     .modal-content
       .modal-header
         button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
         if modalTitle
-          h4#myModalLabel.modal-title Modal #{modalTitle}
+          h4.modal-title(id="#{modalId}Label") #{modalTitle}
       .modal-body
         block content1
       .modal-footer

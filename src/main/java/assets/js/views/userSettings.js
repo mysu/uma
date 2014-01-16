@@ -13,32 +13,34 @@ define(['jquery', 'jquery.validate', 'backbone', 'json!locale/userSettings.json'
       success: function(data){
         if(data.success){
           showResult("success_update_user", true);
+          $('#basicInfoForm')[0].reset();
         }else{
-          showResult("error_update_user, " + data.error, false);
+          showResult("error_update_user", false);
         }
       },
       error: function(err){
-        showResult("error_update_user_unknown", false);
+        showResult("error_update_user", false);
+        $('#basicInfoForm')[0].reset();
         console.log(err);
-      }
-      
+      }      
     });
   };
   
   var createJson = function(){
     return {
+      id: $('#userId').val(),
       currPassword: $('#currPassword').val(),
       password: $('#password').val(),
-      'password_retype': $('#password_retype').val()
+      retypePassword: $('#password_retype').val()
     }
   };
   
-  var showResul = function(message, success){
+  var showResult = function(message, success){
     var resultSelect = $('#resultUpdateUser');
-    resultSelect.remClass('alert-error').remClass('alert-info');
-    resultSelect.addClass(success ? 'alert-info' : 'alert-error');
-    resultSelect.html(i18n[message]).show();
-    resultSelect.wait(5000).fadeOut(1000);
+    resultSelect.removeClass('alert-danger').removeClass('alert-success');
+    resultSelect.addClass(success ? 'alert-success' : 'alert-danger');
+    resultSelect.html('').html(i18n[message]).show();
+    resultSelect.delay(5000).fadeOut(1000);
   };
     
   

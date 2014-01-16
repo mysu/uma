@@ -95,6 +95,11 @@ public class Routes implements ApplicationRoutes {
                 .route("/api/validemail")
                 .with(ApiUserController.class,
                         ApiUserController.Method.validEmail.toString());
+        
+        router.POST()
+        .route("/api/updatebasicinfo")
+        .with(ApiUserController.class,
+                ApiUserController.Method.updateBasicInfo.toString());
     }
 
 }

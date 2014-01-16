@@ -6,6 +6,6 @@ li.dropdown
     span.caret
   ul.dropdown-menu(role="menu", aria-labelledby="dLabel")
     li(role='presentation')
-      a#userSettings(role='menu-item', href='#settings') #{i18n.value("header.userSettings")}
+      a#userSettings(role='menu-item', data-target='#settings') #{i18n.value("header.userSettings")}
 li
   a(href='/logout') #{i18n.value("header.logout")}
