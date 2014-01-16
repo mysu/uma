@@ -13,12 +13,11 @@ html
             li.active
               a(href='/') #{i18n.value("header.home")}
           ul.navbar-right.nav.navbar-nav
-            if userAuth
-              li
-                a(href='#') #{userAuth.username}
-              li
-                a(href='/logout') #{i18n.value("header.logout")}
+            if user
+              include headerLogged
             else
+              li
+                a#register(href='/register') #{i18n.value("header.register")}
               li
                 a#login(href='/login') #{i18n.value("header.login")}
         // /.navbar-collapse

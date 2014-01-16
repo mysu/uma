@@ -1,0 +1,42 @@
+extend ../../layout/modalLayout
+block param
+  - modalTitle=i18n.value("user.settings.title")
+  - modalId="modalUserSettings"
+
+block content1
+  #resultUpdateUser.alert
+  //Nav tabs
+  ul.nav.nav-tabs
+    li.active
+      a(href='#basicInfo', data-toggle='tab')  #{i18n.value("user.settings.basicInfo")}
+    li
+      a(href='#other', data-toggle='tab')  #{i18n.value("user.settings.other")}
+  // Tab panes
+  .tab-content
+    #basicInfo.tab-pane.active
+      br
+      form#basicInfoForm.form-horizontal(role='form')
+        input#userId(type='hidden', value='#{user.id}')
+        .form-group
+          label.control-label.col-md-4 #{i18n.value("user.settings.username")}
+          .col-md-8
+            p.form-control-static #{user.username}
+        .form-group
+          label.control-label.col-md-4 #{i18n.value("user.settings.email")}
+          .col-md-8 
+            p.form-control-static #{user.email}
+        .form-group
+          label.control-label.col-md-4(for='currPassword') #{i18n.value("user.settings.currPassword")}
+          .col-md-8
+            input.form-control#currPassword(type='password', required, minlength='6')
+        .form-group
+          label.control-label.col-md-4(for='password') #{i18n.value("user.settings.newPassword")}
+          .col-md-8
+            input.form-control#password(type='password', required, minlength='6')
+        .form-group
+          label.control-label.col-md-4(for='password_retype') #{i18n.value("user.settings.retypePass")}
+          .col-md-8
+            input.form-control#password_retype(type='password', equalTo='#password')
+        .form-group.text-center
+          button.btn.btn-default #{i18n.value("user.settings.button.updateBasicInfo")}
+    #other.tab-pane Add info here

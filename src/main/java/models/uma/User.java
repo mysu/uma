@@ -144,5 +144,17 @@ public class User implements Cacheable<Long> {
         emailList.add(email);
         return this;
     }
+    
+    /**
+     * Must return the default email for this user
+     * @return
+     */
+    public String getEmail(){
+        if(!getEmailList().isEmpty()){
+            return getEmailList().get(0).getEmail();
+        }else{
+            return "";
+        }
+    }
 
 }

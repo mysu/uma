@@ -15,12 +15,12 @@ define([ 'jquery', 'jquery.validate', 'backbone',
         if(data.success){
           window.location.href='/'
         }else{
-          $('#resultInfo').addClass('alert-error').html(data.error).show();
+          $('#resultInfo').addClass('alert-danger').html(data.error).show();
           console.log('server error creating user' + data.error);
         }
       },
       error: function(err){
-        $('#resultInfo').addClass('alert-error').html('Unknow error').show();
+        $('#resultInfo').addClass('alert-danger').html('Unknow error').show();
         console.log(err);
       }
       
