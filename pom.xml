@@ -20,14 +20,14 @@
 
 
   <properties>
-    <ninja.version>2.3.0</ninja.version>
+    <ninja.version>2.5.1</ninja.version>
     <jetty.version>9.0.5.v20130815</jetty.version>
   </properties>
 
   <repositories>
     <repository>
       <id>jade4ninja-repo</id>
-      <url>https://raw.github.com/emiguelt/jade4ninja/mvn-repo/</url>
+      <url>https://raw.github.com/mysu/jade4ninja/mvn-repo/</url>
       <snapshots>
         <enabled>true</enabled>
         <updatePolicy>daily</updatePolicy>
@@ -48,6 +48,17 @@
         </configuration>
       </plugin>
 
+      <plugin>
+        <groupId>org.ninjaframework</groupId>
+        <artifactId>ninja-maven-plugin</artifactId>
+        <version>${ninja.version}</version>
+        <configuration>
+          <useDefaultExcludes>true</useDefaultExcludes>
+          <excludes>
+            <exclude>**/*.jade</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -81,8 +92,8 @@
           <contextPath>/</contextPath>
           <stopKey>stop</stopKey>
           <stopPort>8889</stopPort>
-          <scanIntervalSeconds>1</scanIntervalSeconds>
-          <reload>manual</reload>
+          <scanIntervalSeconds>1000000</scanIntervalSeconds>
+          <reload>automatic</reload>
           <scanTargetPatterns>
             <scanTargetPattern>
               <directory>target/classes</directory>
@@ -90,12 +101,17 @@
                 <include>**/*</include>
               </includes>
               <excludes>
-                <exclude>**/*.jade</exclude>
-                <exclude>**/*.ftl.html</exclude>
                 <exclude>assets/**</exclude>
+                <exclude>**/*.jade</exclude>
               </excludes>
             </scanTargetPattern>
           </scanTargetPatterns>
+          <systemProperties>
+            <systemProperty>
+              <name>ninja.mode</name>
+              <value>dev</value>
+            </systemProperty>
+          </systemProperties>
         </configuration>
       </plugin>
 
@@ -205,7 +221,7 @@
       <artifactId>tinymce-jquery</artifactId>
       <version>3.4.9</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>jquery-validation</artifactId>
@@ -241,7 +257,7 @@
       <artifactId>requirejs-plugins</artifactId>
       <version>3ff54566f8</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.webjars</groupId>
       <artifactId>requirejs-text</artifactId>
@@ -289,7 +305,7 @@
     <dependency>
       <groupId>org.ninjaframework</groupId>
       <artifactId>jade4ninja-module</artifactId>
-      <version>0.2.0</version>
+      <version>0.3.0</version>
       <exclusions>
         <exclusion>
           <artifactId>commons-logging</artifactId>
